@@ -9,7 +9,7 @@ from sklearn.neighbors import NearestNeighbors
 import os
 
 app = Flask(__name__)
-MODEL_FILE = "property_finder_brain.pkl"
+MODEL_FILE = "property_finder_brain_compressed.pkl"
 
 # --- GLOBAL VARIABLES ---
 nn_model = None
@@ -144,7 +144,11 @@ def recommend():
         recs['final_score'] = (recs['similarity_score']*0.4) + (recs['geo_score']*0.3) + (recs['pop_score']*0.3)
 
         # Return Data
-        rich_cols = ['property_listing_id', 'final_score', 'property_title', 'price', 'beds_int', 'bath_int', 'size_sqft', 'location_name', 'full_location_path', 'property_type', 'offering_type', 'furnished_flag', 'completion_status', 'quality_score', 'days_old']
+        rich_cols = ['property_listing_id', 'final_score', 'property_title', 'price', 'beds_int', 'bath_int', 'size_sqft', 'location_name', 'full_location_path', 'property_type', 'offering_type', 'furnished_flag', 'completion_status', 'quality_score', 'days_old','view_count', 
+            'impression_count', 
+            'popularity_score', 
+            'smart_popularity_score',
+            'super_agent_score']
         valid_cols = [c for c in rich_cols if c in recs.columns]
         
         results = recs.sort_values('final_score', ascending=False).head(5)[valid_cols].where(pd.notnull(recs), None).to_dict(orient='records')
