@@ -111,7 +111,7 @@ def render_card(item, prop_type, offering):
     # B. QUALITY SCORE
     quality = float(item.get('quality_score') or 0)
     # Ensure it doesn't look ugly if it's 0.0
-    quality_txt = f"{quality}/100" if quality > 0 else "N/A"
+    quality_txt = f"{quality}/250" if quality > 0 else "N/A"
     
     # C. AGENT BADGE (Based on real super_agent_score or quality)
     super_score = float(item.get('super_agent_score') or 0)
@@ -232,3 +232,4 @@ if find_btn:
             else: st.error("API Error.")
 
         except Exception as e: st.error(f"Connection Error: {e}")
+
