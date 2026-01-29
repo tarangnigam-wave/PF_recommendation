@@ -3,7 +3,7 @@ import requests
 
 # --- 1. CONFIGURATION ---
 st.set_page_config(page_title="Property Finder AI", page_icon="🏠", layout="wide")
-BASE_URL = "http://127.0.0.1:5000"
+BASE_URL = "https://pf-recommendation.onrender.com"
 
 # --- 2. CSS STYLING ---
 st.markdown("""
@@ -230,4 +230,5 @@ if find_btn:
                     for item in listings:
                         render_card(item, prop_type, offering)
             else: st.error("API Error.")
+
         except Exception as e: st.error(f"Connection Error: {e}")
